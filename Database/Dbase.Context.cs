@@ -25,5 +25,7 @@ namespace Database
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<Blogg> Blogg { get; set; }
     }
 }

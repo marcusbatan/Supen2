@@ -4,20 +4,125 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SupenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="SupenModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="SupenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserId" />
+          </Key>
+          <Property Name="AppUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blogg">
+          <Key>
+            <PropertyRef Name="BloggId" />
+          </Key>
+          <Property Name="BloggId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AppUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Blogg_AppUser">
+          <End Role="AppUser" Type="Self.AppUser" Multiplicity="1" />
+          <End Role="Blogg" Type="Self.Blogg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUser">
+              <PropertyRef Name="AppUserId" />
+            </Principal>
+            <Dependent Role="Blogg">
+              <PropertyRef Name="AppUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SupenModelStoreContainer">
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogg" EntityType="Self.Blogg" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Blogg_AppUser" Association="Self.FK_Blogg_AppUser">
+            <End Role="AppUser" EntitySet="AppUser" />
+            <End Role="Blogg" EntitySet="Blogg" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SupenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="SupenEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="SupenEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="AppUser" EntityType="SupenModel.AppUser" />
+          <EntitySet Name="Blogg" EntityType="SupenModel.Blogg" />
+          <AssociationSet Name="FK_Blogg_AppUser" Association="SupenModel.FK_Blogg_AppUser">
+            <End Role="AppUser" EntitySet="AppUser" />
+            <End Role="Blogg" EntitySet="Blogg" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserId" />
+          </Key>
+          <Property Name="AppUserId" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Blogg" Relationship="SupenModel.FK_Blogg_AppUser" FromRole="AppUser" ToRole="Blogg" />
+        </EntityType>
+        <EntityType Name="Blogg">
+          <Key>
+            <PropertyRef Name="BloggId" />
+          </Key>
+          <Property Name="BloggId" Type="Guid" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppUserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="AppUser" Relationship="SupenModel.FK_Blogg_AppUser" FromRole="Blogg" ToRole="AppUser" />
+        </EntityType>
+        <Association Name="FK_Blogg_AppUser">
+          <End Type="SupenModel.AppUser" Role="AppUser" Multiplicity="1" />
+          <End Type="SupenModel.Blogg" Role="Blogg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUser">
+              <PropertyRef Name="AppUserId" />
+            </Principal>
+            <Dependent Role="Blogg">
+              <PropertyRef Name="AppUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SupenModelStoreContainer" CdmEntityContainer="SupenEntities" />
+        <EntityContainerMapping StorageEntityContainer="SupenModelStoreContainer" CdmEntityContainer="SupenEntities" >
+          <EntitySetMapping Name="AppUser">
+            <EntityTypeMapping TypeName="SupenModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogg">
+            <EntityTypeMapping TypeName="SupenModel.Blogg">
+              <MappingFragment StoreEntitySet="Blogg">
+                <ScalarProperty Name="AppUserId" ColumnName="AppUserId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="BloggId" ColumnName="BloggId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e7567b1eb464dcc84157aee58292d6b" Name="Diagram1" />
+      <Diagram DiagramId="3e7567b1eb464dcc84157aee58292d6b" Name="Diagram1" >
+        <EntityTypeShape EntityType="SupenModel.AppUser" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SupenModel.Blogg" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="SupenModel.FK_Blogg_AppUser" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

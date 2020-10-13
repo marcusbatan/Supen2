@@ -48,6 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppUser.cs">
+      <DependentUpon>Dbase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppUserRepos.cs" />
+    <Compile Include="Blogg.cs">
+      <DependentUpon>Dbase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BloggRepos.cs" />
     <Compile Include="Dbase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
