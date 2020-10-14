@@ -8,7 +8,7 @@ namespace Database
 {
     public class AppUserRepos
     {
-        public bool AddUser(string FirstName, string LastName, int Age, string Email, string Password, byte[] Image)
+        public bool AddUser(string FirstName, string LastName, int Age, string Email, string Password)
         {
             using (var db = new SupenEntities())
             {
@@ -20,8 +20,9 @@ namespace Database
                     Age = Age,
                     Email = Email,
                     Password = Password,
-                    Image = Image
                 };
+                db.AppUser.Add(appUser);
+                db.SaveChanges();
                 return true;
             }
         }

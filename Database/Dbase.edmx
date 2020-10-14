@@ -15,7 +15,6 @@
           <Property Name="Age" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Blogg">
           <Key>
@@ -68,7 +67,6 @@
           <Property Name="Age" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Blogg" Relationship="SupenModel.FK_Blogg_AppUser" FromRole="AppUser" ToRole="Blogg" />
         </EntityType>
         <EntityType Name="Blogg">
@@ -102,7 +100,6 @@
           <EntitySetMapping Name="AppUser">
             <EntityTypeMapping TypeName="SupenModel.AppUser">
               <MappingFragment StoreEntitySet="AppUser">
-                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Age" ColumnName="Age" />

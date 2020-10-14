@@ -20,10 +20,8 @@ namespace Supen.Controllers
             using (var db = new SupenEntities())
             {
                 var repos = new AppUserRepos();
-                var addUser = repos.AddUser(user.FirstName, user.LastName, user.Age, user.Email, user.Password, user.Image);
+                var addUser = repos.AddUser(user.FirstName, user.LastName, user.Age, user.Email, user.Password);
                 ViewBag.mess = "Success!";
-                db.AppUser.Add(user);
-                db.SaveChanges();
             }
             return View(user);
         }
