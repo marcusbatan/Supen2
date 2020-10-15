@@ -1,0 +1,30 @@
+﻿@model List<Database.AppUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage3.cshtml";
+}
+
+<h2>Search for users!</h2>
+<div class="w3ls-login box box--big">
+    <form method="get" action="">
+        <div class="agile-field-txt">
+            <label><i class="fa fa-user" aria-hidden="true"></i> Email </label>
+            <input type="text" name="search" placeholder="Search on email" />
+            <input type="submit" name="submit" />
+        </div>
+    </form>
+</div>
+@foreach (var item in Model)
+{
+<div style="margin-top: 25px;margin-left: 10px" :>
+    @item.Email
+    <br />
+    @item.FirstName @item.LastName
+    <br />
+    @item.Age
+    <br />
+    <hr />
+    @Scripts.Render("~/bundles/Site")
+</div>
+}

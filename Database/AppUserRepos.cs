@@ -26,5 +26,21 @@ namespace Database
                 return true;
             }
         }
+        public AppUser GetAppUser(Guid id)
+        {
+            using (var db = new SupenEntities())
+            {
+                var getUser = db.AppUser.Where(a => a.AppUserId == id).FirstOrDefault();
+                return getUser;
+            }
+        }
+        public List<AppUser> SearchUser(string search)
+        {
+            using (var db = new SupenEntities())
+            {
+                var searchuser = db.AppUser.Where(a => a.Email.Contains(search)).ToList();
+                return searchuser;
+            }
+        }
     }
 }
