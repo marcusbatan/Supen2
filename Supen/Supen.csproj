@@ -130,6 +130,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppUserController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,6 +156,11 @@
     <Content Include="fontts\fontawesome-webfont.woff" />
     <Content Include="fontts\fontawesome-webfont.woff2" />
     <Content Include="fontts\FontAwesome.otf" />
+    <Content Include="fontts\fontawesome-webfontt.ttf" />
+    <Content Include="fontts\fontawesome-webfontt.woff" />
+    <Content Include="fontts\fontawesome-webfontt.woff2" />
+    <Content Include="fontts\fontawesome-webfonttt.eot" />
+    <Content Include="fontts\FontAwesomee.otf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -168,8 +174,10 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="styles\ffont-awesome.css" />
     <Content Include="styles\font-awesome.css" />
+    <Content Include="styles\font-awesomes.css" />
     <Content Include="styles\sstyle.css" />
     <Content Include="styles\style.css" />
+    <Content Include="styles\styles.css" />
     <Content Include="video\Ipad.mp4" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -193,6 +201,9 @@
     <Content Include="Views\_LayoutPage2.cshtml" />
     <Content Include="Views\AppUser\Create.cshtml" />
     <Content Include="Views\Shared\LoggedIn.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\_LayoutPage3.cshtml" />
+    <Content Include="Views\Contact\Sent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
