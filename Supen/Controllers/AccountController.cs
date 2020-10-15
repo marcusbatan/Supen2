@@ -26,9 +26,10 @@ namespace Supen.Controllers
                     var obj = db.AppUser.Where(a => a.Email.Equals(appuser.Email) && a.Password.Equals(appuser.Password)).FirstOrDefault();
                     if (obj != null)
                     {
-                        Session["UserID"] = obj.AppUserId.ToString();
+                        Session["AppUserId"] = obj.AppUserId.ToString();
                         Session["Email"] = obj.Email.ToString();
-                        return RedirectToAction("Home");
+                        ViewBag.mess = obj + "Du har nu loggat in";
+                        return RedirectToAction("Index", "Home");
                     }
                 }
             }

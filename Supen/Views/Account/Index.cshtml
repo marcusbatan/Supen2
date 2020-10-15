@@ -9,7 +9,7 @@
 @using (Html.BeginForm("Index", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-
+    @ViewBag.mess
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
