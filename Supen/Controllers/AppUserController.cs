@@ -10,12 +10,12 @@ namespace Supen.Controllers
     public class AppUserController : Controller
     {
         // GET: AppUser
-        public ActionResult Index()
+        public ActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Index(AppUser user)
+        public ActionResult Create(AppUser user)
         {
             using (var db = new SupenEntities())
             {

@@ -145,8 +145,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\bg.jpg" />
+    <Content Include="js\jquery-2.1.4.min.js" />
+    <Content Include="js\jquery.vide.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fontts\fontawesome-webfont.eot" />
+    <Content Include="fontts\fontawesome-webfont.ttf" />
+    <Content Include="fontts\fontawesome-webfont.woff" />
+    <Content Include="fontts\fontawesome-webfont.woff2" />
+    <Content Include="fontts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -158,6 +166,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="styles\ffont-awesome.css" />
+    <Content Include="styles\font-awesome.css" />
+    <Content Include="styles\sstyle.css" />
+    <Content Include="styles\style.css" />
+    <Content Include="video\Ipad.mp4" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -172,9 +185,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\AppUser\Index.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\_LayoutPage1.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Success.cshtml" />
+    <Content Include="Views\Account\Error.cshtml" />
+    <Content Include="Views\_LayoutPage2.cshtml" />
+    <Content Include="Views\AppUser\Create.cshtml" />
+    <Content Include="Views\Shared\LoggedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,36 +5,47 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Supen.Controllers;
+using System.Data.SqlClient;
 
 namespace Supen.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-        public ActionResult Index()
+        SqlConnection con = new SqlConnection();
+        SqlCommand com = new SqlCommand();
+        SqlDataReader dr;
+        [HttpGet]
+        public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(AppUser appuser)
+        void connectionString()
         {
-            if (ModelState.IsValid)
-            {
-                using (var db = new SupenEntities())
-                {
-                    var obj = db.AppUser.Where(a => a.Email.Equals(appuser.Email) && a.Password.Equals(appuser.Password)).FirstOrDefault();
-                    if (obj != null)
-                    {
-                        Session["AppUserId"] = obj.AppUserId.ToString();
-                        Session["Email"] = obj.Email.ToString();
-                        ViewBag.mess = obj + "Du har nu loggat in";
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-            }
-            return View(appuser);
+            con.ConnectionString = "data source=(LocalDb)\\MSSQLLocalDB; Database=Supen; integrated security = SSPI;";
         }
+        [HttpPost]
+        public ActionResult Verify(string email, string password)
+        {
+            connectionString();
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT * FROM AppUser WHERE Password = '" + password + "' AND EMAIL ='" + email + "'";
+            ViewBag.test = email + password;
+            dr = com.ExecuteReader();
+            if (dr.Read())
+            {
+                ViewBag.test = email + password;
+                con.Close();
+                return View("Success");
+            }
+            else
+            {
+                ViewBag.test = email + password;
+                con.Close();
+                return View("Error");
+            }
 
+        }
     }
 }
