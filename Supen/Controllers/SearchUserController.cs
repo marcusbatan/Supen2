@@ -10,6 +10,7 @@ namespace Supen.Controllers
 {
     public class SearchUserController : Controller
     {
+        private bool ErrorMessage = false;
         public ActionResult Index(string search)
         {
             using (var db = new SupenEntities())
@@ -18,6 +19,16 @@ namespace Supen.Controllers
                 var searchedUser = repos.SearchUser(search);
                 return View(searchedUser);
             }
+        }
+        public ActionResult VisitProfile(Guid id)
+        {
+            var profile = new AppUser(id);
+            if (ErrorMessage == true)
+            {
+                ViewBag.Message = "test";
+            }
+            ViewBag.profile = profile;
+            return View();
         }
     }
 }

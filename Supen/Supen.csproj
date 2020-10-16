@@ -210,6 +210,7 @@
     <Content Include="Views\_LayoutPage3.cshtml" />
     <Content Include="Views\Contact\Sent.cshtml" />
     <Content Include="Views\SearchUser\Index.cshtml" />
+    <Content Include="Views\AppUser\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

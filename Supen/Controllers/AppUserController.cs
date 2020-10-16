@@ -9,6 +9,7 @@ namespace Supen.Controllers
 {
     public class AppUserController : Controller
     {
+        bool ErrorMessage = false;
         // GET: AppUser
         public ActionResult Create()
         {
@@ -24,6 +25,16 @@ namespace Supen.Controllers
                 ViewBag.mess = "Success!";
             }
             return View(user);
+        }
+        public ActionResult Profile(Guid id)
+        {
+            var visitProfile = new Database.AppUser(id);
+            if (ErrorMessage == true)
+            {
+                ViewBag.mess = "test";
+            }
+            ViewBag.profile = visitProfile;
+            return View();
         }
     }
 }
