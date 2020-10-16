@@ -36,5 +36,10 @@ namespace Supen.Controllers
             ViewBag.profile = visitProfile;
             return View();
         }
+        public ActionResult MyPage()
+        {
+
+            return View();
+        }
     }
 }

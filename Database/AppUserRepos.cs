@@ -42,5 +42,13 @@ namespace Database
                 return searchuser;
             }
         }
+        public AppUser GetMyProfile(Guid id)
+        {
+            using (var db = new SupenEntities())
+            {
+                var getId = db.AppUser.Where(a => a.AppUserId == id).FirstOrDefault();
+                return getId;
+            }
+        }
     }
 }
