@@ -30,7 +30,7 @@ namespace Supen.Controllers
             connectionString();
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT * FROM AppUser WHERE Password = '" + password +"' and Email='"+email +"'";
+            com.CommandText = "SELECT * FROM AppUser WHERE Password = '" + password + "' and Email='" + email + "'";
             ViewBag.test = email + password;
             dr = com.ExecuteReader();
             if (dr.Read())

@@ -173,6 +173,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="slideshow\pexels-cadeau-maestro-1170412 %281%29.jpg" />
+    <Content Include="slideshow\pexels-cowomen-2041627.jpg" />
+    <Content Include="slideshow\pexels-format-1029757.jpg" />
+    <Content Include="slideshow\pexels-marc-mueller-380769.jpg" />
     <Content Include="styles\ffont-awesome.css" />
     <Content Include="styles\font-awesome.css" />
     <Content Include="styles\font-awesomes.css" />
