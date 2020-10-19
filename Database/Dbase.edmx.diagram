@@ -8,6 +8,9 @@
         <EntityTypeShape EntityType="SupenModel.AppUser" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="SupenModel.Blogg" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="SupenModel.FK_Blogg_AppUser" />
+        <EntityTypeShape EntityType="SupenModel.Team" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="SupenModel.Games" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="SupenModel.FK_Team_Totable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

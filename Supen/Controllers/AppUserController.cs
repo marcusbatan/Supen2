@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Supen.Controllers
 {
     public class AppUserController : Controller
@@ -36,9 +37,14 @@ namespace Supen.Controllers
             ViewBag.profile = visitProfile;
             return View();
         }
-        public ActionResult MyPage()
+        public ActionResult MyPage(Guid id)
         {
-
+            var visitMyPage = new Database.AppUser(id);
+            if (ErrorMessage == true)
+            {
+                ViewBag.mess = "test";
+            }
+            ViewBag.myPage = visitMyPage;
             return View();
         }
     }

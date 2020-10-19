@@ -27,5 +27,7 @@ namespace Database
     
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<Blogg> Blogg { get; set; }
+        public DbSet<Team> TeamSet { get; set; }
+        public DbSet<Games> Games { get; set; }
     }
 }
