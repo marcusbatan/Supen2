@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AppUserController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchUserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -212,6 +213,8 @@
     <Content Include="Views\SearchUser\Index.cshtml" />
     <Content Include="Views\AppUser\Profile.cshtml" />
     <Content Include="Views\AppUser\MyPage.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Game\fillCmb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

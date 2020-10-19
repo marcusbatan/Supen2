@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Dbase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GameRepos.cs" />
     <Compile Include="Games.cs">
       <DependentUpon>Dbase.tt</DependentUpon>
     </Compile>

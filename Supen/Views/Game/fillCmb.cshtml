@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "fillCmb";
+    Layout = "~/Views/_LayoutPage3.cshtml";
+}
+
+<h2>Regga match</h2>
+@Html.DropDownList("listofteams", ViewBag.listofteams as SelectList, "List of teams!")
+
