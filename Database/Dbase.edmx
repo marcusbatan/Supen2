@@ -25,26 +25,27 @@
           <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AppUserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <EntityType Name="Games">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Supen.dbo.Game' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Game">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="GameId" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="GameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HomeTeam" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="AwayTeam" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="HomeScore" Type="int" Nullable="false" />
           <Property Name="AwayScore" Type="int" Nullable="false" />
-          <Property Name="TeamId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Team">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TeamName" Type="nchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Supen.dbo.Teams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Supen.dbo.Team' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Blogg_AppUser">
           <End Role="AppUser" Type="Self.AppUser" Multiplicity="1" />
           <End Role="Blogg" Type="Self.Blogg" Multiplicity="*" />
@@ -57,30 +58,27 @@ warning 6002: The table/view 'Supen.dbo.Teams' does not have a primary key defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Team_Totable">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="Games" Type="Self.Games" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Games">
-              <PropertyRef Name="TeamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SupenModelStoreContainer">
           <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Blogg" EntityType="Self.Blogg" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Game" EntityType="Self.Game" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Game].[GameId] AS [GameId], 
+[Game].[HomeTeam] AS [HomeTeam], 
+[Game].[AwayTeam] AS [AwayTeam], 
+[Game].[HomeScore] AS [HomeScore], 
+[Game].[AwayScore] AS [AwayScore]
+FROM [dbo].[Game] AS [Game]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Team" EntityType="Self.Team" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Team].[TeamId] AS [TeamId], 
+[Team].[TeamName] AS [TeamName]
+FROM [dbo].[Team] AS [Team]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Blogg_AppUser" Association="Self.FK_Blogg_AppUser">
             <End Role="AppUser" EntitySet="AppUser" />
             <End Role="Blogg" EntitySet="Blogg" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Team_Totable" Association="Self.FK_Team_Totable">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Games" EntitySet="Games" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -94,12 +92,8 @@ warning 6002: The table/view 'Supen.dbo.Teams' does not have a primary key defin
             <End Role="AppUser" EntitySet="AppUser" />
             <End Role="Blogg" EntitySet="Blogg" />
           </AssociationSet>
-          <EntitySet Name="TeamSet" EntityType="SupenModel.Team" />
-          <EntitySet Name="Games" EntityType="SupenModel.Games" />
-          <AssociationSet Name="FK_Team_Totable" Association="SupenModel.FK_Team_Totable">
-            <End Role="Team1" EntitySet="TeamSet" />
-            <End Role="Games" EntitySet="Games" />
-          </AssociationSet>
+          <EntitySet Name="Game" EntityType="SupenModel.Game" />
+          <EntitySet Name="Team" EntityType="SupenModel.Team" />
         </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
@@ -135,38 +129,23 @@ warning 6002: The table/view 'Supen.dbo.Teams' does not have a primary key defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Team">
+        <EntityType Name="Game">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="GameId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Games" Relationship="SupenModel.FK_Team_Totable" FromRole="Team1" ToRole="Games" />
-        </EntityType>
-        <EntityType Name="Games">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HomeTeam" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AwayTeam" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HomeScore" Type="Int32" Nullable="false" />
           <Property Name="AwayScore" Type="Int32" Nullable="false" />
-          <Property Name="TeamId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Team" Relationship="SupenModel.FK_Team_Totable" FromRole="Games" ToRole="Team1" />
         </EntityType>
-        <Association Name="FK_Team_Totable">
-          <End Type="SupenModel.Team" Role="Team1" Multiplicity="1" />
-          <End Type="SupenModel.Games" Role="Games" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team1">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Games">
-              <PropertyRef Name="TeamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,23 +174,22 @@ warning 6002: The table/view 'Supen.dbo.Teams' does not have a primary key defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TeamSet">
-            <EntityTypeMapping TypeName="SupenModel.Team">
-              <MappingFragment StoreEntitySet="Team">
-                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Games">
-            <EntityTypeMapping TypeName="SupenModel.Games">
-              <MappingFragment StoreEntitySet="Games">
-                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+          <EntitySetMapping Name="Game">
+            <EntityTypeMapping TypeName="SupenModel.Game">
+              <MappingFragment StoreEntitySet="Game">
                 <ScalarProperty Name="AwayScore" ColumnName="AwayScore" />
                 <ScalarProperty Name="HomeScore" ColumnName="HomeScore" />
                 <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
                 <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="SupenModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

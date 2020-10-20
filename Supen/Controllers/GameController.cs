@@ -17,18 +17,28 @@ namespace Supen.Controllers
     {
         public ActionResult Index()
         {
+            var db = new SupenEntities();
+            var teams = new Team();
+            ViewBag.Team = new SelectList(db.Team, "TeamName", "TeamName", "SelectedValue");
+            ViewBag.Team2 = new SelectList(db.Team, "TeamName", "TeamName", "SelectedValue");
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Games game)
+        public ActionResult Index(Game game)
         {
-            using (var db = new SupenEntities())
+            try
             {
-                var teams = new Team();
-                ViewBag.Team = db.TeamSet.ToList();
-                ViewBag.Team2 = db.TeamSet.ToList();
-                return View();
+                using (var db = new SupenEntities())
+                {
+                    var repos = new GameRepos();
+                    repos.addGames(324, game.HomeTeam, game.AwayTeam, game.HomeScore, game.AwayScore, 3);
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return View();
         }
     }
 }

@@ -14,14 +14,7 @@ namespace Database
     
     public partial class Team
     {
-        public Team()
-        {
-            this.Games = new HashSet<Games>();
-        }
-    
-        public int Id { get; set; }
+        public int TeamId { get; set; }
         public string TeamName { get; set; }
-    
-        public virtual ICollection<Games> Games { get; set; }
     }
 }
