@@ -1,8 +1,33 @@
-﻿
+﻿@model Database.Games
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/_LayoutPage3.cshtml";
 }
 
 <h2>Regga match</h2>
-@Html.DropDownList("teamList", ViewBag.listofteams as SelectList, "List of teams!")
+
+<div class="form-group">
+    @Html.LabelFor(model => model., htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+    </div>
+</div>
+@Html.DropDownListFor(model => model.TeamName, new SelectList(ViewBag.Team, "Id", "TeamName"), "Select Hometeam")
+@Html.DropDownListFor(model => model.TeamName, new SelectList(ViewBag.Team2, "Id", "TeamName"), "Select Awayteam")
+
+
