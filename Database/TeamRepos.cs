@@ -7,15 +7,16 @@ namespace Database
 {
     public class TeamRepos
     {
-        public Team CreateTeam(string teamName)
+        public Teams CreateTeam(string teamName)
         {
             using (var db = new SupenEntities())
             {
-                var team = new Team
+                var team = new Teams
                 {
+                    TeamId = Guid.NewGuid(),
                     TeamName = teamName
                 };
-                db.Team.Add(team);
+                db.Teams.Add(team);
                 db.SaveChanges();
                 return team;
             }

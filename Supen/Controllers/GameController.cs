@@ -18,20 +18,20 @@ namespace Supen.Controllers
         public ActionResult Index()
         {
             var db = new SupenEntities();
-            var teams = new Team();
-            ViewBag.Team = new SelectList(db.Team, "TeamName", "TeamName", "SelectedValue");
-            ViewBag.Team2 = new SelectList(db.Team, "TeamName", "TeamName", "SelectedValue");
+            var teams = new Teams();
+            ViewBag.Team = new SelectList(db.Teams, "TeamName", "TeamName", "SelectedValue");
+            ViewBag.Team2 = new SelectList(db.Teams, "TeamName", "TeamName", "SelectedValue");
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Game game)
+        public ActionResult Index(Games game)
         {
             try
             {
                 using (var db = new SupenEntities())
                 {
                     var repos = new GameRepos();
-                    repos.addGames(324, game.HomeTeam, game.AwayTeam, game.HomeScore, game.AwayScore, 3);
+                    repos.addGames(game.HomeTeam, game.AwayTeam, game.HomeScore, game.AwayScore);
                 }
             }
             catch (Exception e)

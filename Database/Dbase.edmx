@@ -25,6 +25,23 @@
           <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AppUserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HomeTeam" Type="nvarchar" MaxLength="100" />
+          <Property Name="AwayTeam" Type="nvarchar" MaxLength="100" />
+          <Property Name="HomeScore" Type="int" />
+          <Property Name="AwayScore" Type="int" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <Association Name="FK_Blogg_AppUser">
           <End Role="AppUser" Type="Self.AppUser" Multiplicity="1" />
           <End Role="Blogg" Type="Self.Blogg" Multiplicity="*" />
@@ -40,6 +57,8 @@
         <EntityContainer Name="SupenModelStoreContainer">
           <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Blogg" EntityType="Self.Blogg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Blogg_AppUser" Association="Self.FK_Blogg_AppUser">
             <End Role="AppUser" EntitySet="AppUser" />
             <End Role="Blogg" EntitySet="Blogg" />
@@ -56,6 +75,8 @@
             <End Role="AppUser" EntitySet="AppUser" />
             <End Role="Blogg" EntitySet="Blogg" />
           </AssociationSet>
+          <EntitySet Name="Games" EntityType="SupenModel.Games" />
+          <EntitySet Name="Teams" EntityType="SupenModel.Teams" />
         </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
@@ -91,6 +112,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Guid" Nullable="false" />
+          <Property Name="HomeTeam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AwayTeam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HomeScore" Type="Int32" />
+          <Property Name="AwayScore" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Guid" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -116,6 +154,25 @@
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="BloggId" ColumnName="BloggId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="SupenModel.Games">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="AwayScore" ColumnName="AwayScore" />
+                <ScalarProperty Name="HomeScore" ColumnName="HomeScore" />
+                <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
+                <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="SupenModel.Teams">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

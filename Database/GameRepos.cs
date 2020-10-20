@@ -8,19 +8,19 @@ namespace Database
 {
     public class GameRepos
     {
-        public Game addGames(int id, string hometeam, string awayteam, int homescore, int awayscore, int teamId)
+        public Games addGames(string hometeam, string awayteam, int? homescore, int? awayscore)
         {
             using (var db = new SupenEntities())
             {
-                var addGame = new Game
+                var addGame = new Games
                 {
-                    GameId = id,
+                    GameId = Guid.NewGuid(),
                     HomeTeam = hometeam,
                     AwayTeam = awayteam,
                     HomeScore = homescore,
                     AwayScore = awayscore,
                 };
-                db.Game.Add(addGame);
+                db.Games.Add(addGame);
                 db.SaveChanges();
                 return addGame;
             }
