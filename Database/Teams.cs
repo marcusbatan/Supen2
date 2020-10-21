@@ -14,13 +14,14 @@ namespace Database
 
     public partial class Teams
     {
-        public Teams(Guid id)
+        public Teams(Guid id, string teamName)
         {
             using (var db = new SupenEntities())
             {
                 var repos = new TeamRepos();
-                var team = repos.GetTeam(id);
+                var team = repos.GetTeam(id, teamName);
                 TeamId = id;
+                TeamName = teamName;
             }
         }
         public Teams()

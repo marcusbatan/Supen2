@@ -31,13 +31,14 @@ namespace Database
                 return listTeams;
             }
         }
-        public Teams GetTeam(Guid id)
+        public Teams GetTeam(Guid id, string teamName)
         {
             using (var db = new SupenEntities())
             {
-                var getTeam = db.Teams.Where(t => t.TeamId == id).FirstOrDefault();
+                var getTeam = db.Teams.Where(t => t.TeamId == id && t.TeamName == teamName).FirstOrDefault();
                 return getTeam;
             }
         }
+        
     }
 }

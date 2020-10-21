@@ -22,7 +22,7 @@
     {
         <tr>
             <td>
-                <a href="@Url.Action("TeamPage", "Team", new {id = item.TeamId})">
+                <a href="@Url.Action("TeamPage", "Team", new {id = item.TeamId, teamname = item.TeamName})">
 
                     @Html.DisplayFor(modelItem => item.TeamName)
                 </a>

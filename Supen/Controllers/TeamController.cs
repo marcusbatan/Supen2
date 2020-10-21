@@ -34,10 +34,11 @@ namespace Supen.Controllers
                 return View(listOfTeams);
             }
         }
-        public ActionResult TeamPage(Guid id)
+        public ActionResult TeamPage(Guid id, string teamName)
         {
-            var page = new Teams(id);
+            var page = new Teams(id, teamName);
             ViewBag.TeamPage = page;
+            ViewBag.Team = teamName;
             return View(page);
         }
     }
