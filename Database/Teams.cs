@@ -11,9 +11,22 @@ namespace Database
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Teams
     {
+        public Teams(Guid id)
+        {
+            using (var db = new SupenEntities())
+            {
+                var repos = new TeamRepos();
+                var team = repos.GetTeam(id);
+                TeamId = id;
+            }
+        }
+        public Teams()
+        {
+
+        }
         public System.Guid TeamId { get; set; }
         public string TeamName { get; set; }
     }

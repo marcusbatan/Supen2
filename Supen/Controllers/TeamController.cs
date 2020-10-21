@@ -1,6 +1,7 @@
 ﻿using Database;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +24,21 @@ namespace Supen.Controllers
                 var rep = repos.CreateTeam(teamName);
                 return View(rep);
             }
+        }
+        public ActionResult listOfTeams()
+        {
+            using (var db = new SupenEntities())
+            {
+                var repos = new TeamRepos();
+                var listOfTeams = repos.ListTeams();
+                return View(listOfTeams);
+            }
+        }
+        public ActionResult TeamPage(Guid id)
+        {
+            var page = new Teams(id);
+            ViewBag.TeamPage = page;
+            return View(page);
         }
     }
 }

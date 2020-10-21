@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Database.Teams>
+
+@{
+    ViewBag.Title = "listOfTeams";
+    Layout = "~/Views/_LayoutPage3.cshtml";
+}
+
+<h2>listOfTeams</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("TeamPage", "Team", new {id = item.TeamId})">
+
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </a>
+
+            </td>
+        </tr>
+    }
+
+</table>
