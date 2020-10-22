@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,18 @@ namespace Database
                 var getId = db.AppUser.Where(a => a.AppUserId == id).FirstOrDefault();
                 return getId;
             }
+        }
+        public void UpdateValues(string firstName, string lastName, int age, Guid id)
+        {
+            using (var db = new SupenEntities())
+            {
+                var user = db.AppUser.FirstOrDefault(a => a.AppUserId == id);
+                user.FirstName = firstName;
+                user.LastName = lastName;
+                user.Age = age;
+                db.SaveChanges();
+            }
+
         }
     }
 }

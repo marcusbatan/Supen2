@@ -16,12 +16,12 @@ namespace Supen.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string text, string cat)
+        public ActionResult Index(string text, string cat, Guid id)
         {
             using (var db = new SupenEntities())
             {
                 var repos = new BloggRepos();
-                repos.CreateBlogPost(text, cat);
+                repos.CreateBlogPost(text, cat, id);
                 return View();
             }
         }

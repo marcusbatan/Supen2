@@ -219,6 +219,7 @@
     <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Team\listOfTeams.cshtml" />
     <Content Include="Views\Team\TeamPage.cshtml" />
+    <Content Include="Views\AppUser\UpdateValues.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

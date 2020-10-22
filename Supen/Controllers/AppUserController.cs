@@ -47,5 +47,14 @@ namespace Supen.Controllers
             ViewBag.myPage = visitMyPage;
             return View();
         }
+        public ActionResult UpdateValues(string firstName, string lastName, int age, Guid id)
+        {
+            using (var db = new SupenEntities())
+            {
+                var repos = new AppUserRepos();
+                var appUser = repos.UpdateValues(firstName, lastName, age, id);
+                return View();
+            }
+        }
     }
 }
