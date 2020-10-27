@@ -33,11 +33,18 @@ namespace Supen.Controllers
             com.CommandText = "SELECT * FROM AppUser WHERE Password = '" + password + "' and Email='" + email + "'";
             ViewBag.test = email + password;
             dr = com.ExecuteReader();
+            var user = new AppUser()
+            {
+                Email = email,
+                Password = password,
+                AppUserId = Guid.NewGuid()
+            };
+            var url = string.Format("/AppUser/MyPage?/AppUserId = {0} & Email = {1} & Password = {2}", user.AppUserId, user.Email, user.Password);
             if (dr.Read())
             {
                 ViewBag.test = email + password;
                 con.Close();
-                return View("Success");
+                return Redirect(url);
             }
             else
             {

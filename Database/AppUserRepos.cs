@@ -51,7 +51,7 @@ namespace Database
                 return getId;
             }
         }
-        public void UpdateValues(string firstName, string lastName, int age, Guid id)
+        public AppUser UpdateValues(string firstName, string lastName, int age, Guid id)
         {
             using (var db = new SupenEntities())
             {
@@ -60,6 +60,7 @@ namespace Database
                 user.LastName = lastName;
                 user.Age = age;
                 db.SaveChanges();
+                return user;
             }
 
         }
